@@ -18,7 +18,7 @@ from database import temp_orders, orders_collection, menu_collection
 # Initialize ChatBot with MongoDB storage adapter
 chatbot = ChatBot('CustomerServiceBot',
                 storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
-                database_uri='mongodb://localhost:27017/chatbot_database',
+                database_uri='mongodb://mongo:MlnHXEHaSvWNoYVxQFjHTZXhGzJAUxgv@monorail.proxy.rlwy.net:16429/chatbot_database',
                 database='chatbot_database')
 
 # Train the chatbot

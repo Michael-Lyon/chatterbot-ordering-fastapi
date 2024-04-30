@@ -1,1 +1,1 @@
-pyth
+python-3.11
