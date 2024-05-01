@@ -8,10 +8,9 @@ from nltk import Tree
 
 
 
-from helpers import add_to_order, extract_name_address, extract_order_id, get_order, remove_order
-from models import NAME_FLAG, MenuItem, Order, OrderItem
-from database import temp_orders, orders_collection, menu_collection
-from database import db
+from ..helpers import add_to_order, extract_name_address, extract_order_id, get_order, remove_order
+from ..models import NAME_FLAG, MenuItem, Order, OrderItem
+from ..database import temp_orders, orders_collection, menu_collection
 
 
 

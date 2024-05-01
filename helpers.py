@@ -5,12 +5,12 @@ from typing import List, Optional
 import uuid
 
 from fastapi import HTTPException, status
-from models import CustomerInfo, OrderItem
+from .models import CustomerInfo, OrderItem
 import  nltk.tag.stanford as st
 import pyap
-from database import customers_collection, orders_collection
+from .database import customers_collection, orders_collection
 
-tagger = st.StanfordNERTagger('stanford-ner-2014-08-27/classifiers/english.all.3class.distsim.crf.ser.gz', 'stanford-ner-2014-08-27/stanford-ner.jar')
+tagger = st.StanfordNERTagger('./stanford-ner-2014-08-27/classifiers/english.all.3class.distsim.crf.ser.gz', './stanford-ner-2014-08-27/stanford-ner.jar')
 
 
 

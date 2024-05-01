@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from handlers import chat_handlers
-from models import ChatInput
-from database import menu_collection, orders_collection
+from .handlers import chat_handlers
+from .models import ChatInput
+from .database import menu_collection, orders_collection
 
 app = FastAPI()
 
