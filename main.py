@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from .handlers import chat_handlers
-from .models import ChatInput
-from .database import menu_collection, orders_collection
+from handlers import chat_handlers
+from models import ChatInput
+from database import menu_collection, orders_collection
 
 app = FastAPI()
 
@@ -26,3 +26,5 @@ async def get_menu():
 async def get_orders():
     orders = list(orders_collection.find({}, {'_id': False}))  # Exclude '_id' from the result
     return {"orders": orders}
+
+

@@ -5,12 +5,22 @@ from typing import List, Optional
 import uuid
 
 from fastapi import HTTPException, status
-from .models import CustomerInfo, OrderItem
+from models import CustomerInfo, OrderItem
 import  nltk.tag.stanford as st
 import pyap
-from .database import customers_collection, orders_collection
+from database import customers_collection, orders_collection
+from pathlib import Path
 
-tagger = st.StanfordNERTagger('./stanford-ner-2014-08-27/classifiers/english.all.3class.distsim.crf.ser.gz', './stanford-ner-2014-08-27/stanford-ner.jar')
+# Assuming the root directory is the parent directory of the directory containing this script
+root_dir = Path(__file__).parent  # Go up two levels to reach the root directory
+
+# Construct the path to the file relative to the root directory
+file_path1 = root_dir / "stanford-ner-2014-08-27" / "classifiers" / "english.all.3class.distsim.crf.ser.gz"
+file_path2 = root_dir / "stanford-ner-2014-08-27" / "stanford-ner.jar"
+
+
+
+tagger = st.StanfordNERTagger(f"{file_path1}", f"{file_path2}")
 
 
 
