@@ -8,22 +8,23 @@ from nltk import Tree
 
 
 
-
 from helpers import add_to_order, extract_name_address, extract_order_id, get_order, remove_order
 from models import NAME_FLAG, MenuItem, Order, OrderItem
 from database import temp_orders, orders_collection, menu_collection
+from database import db
 
 
 
 # Initialize ChatBot with MongoDB storage adapter
 chatbot = ChatBot('CustomerServiceBot',
                 storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
-                database_uri='mongodb://mongo:MlnHXEHaSvWNoYVxQFjHTZXhGzJAUxgv@monorail.proxy.rlwy.net:16429/chatbot_database',
-                database='chatbot_database')
+                #             mongodb+srv://mongo:MlnHXEHaSvWNoYVxQFjHTZXhGzJAUxgv@monorail.proxy.rlwy.net/
+                database_uri="mongodb://pygod:pygod1234@monorail.proxy.rlwy.net:16429/chatbot_database",
+                )
 
 # Train the chatbot
 trainer = ChatterBotCorpusTrainer(chatbot)
-
+trainer.train("chatterbot.corpus.english")
 
 
 
