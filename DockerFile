@@ -39,6 +39,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install -r requirements.txt
 
 RUN python -m pip install PyYAML==5.1.1
+
+RUN [ "python", "-c", "import nltk; nltk.download('all')" ]
+
 # Switch to the non-privileged user to run the application.
 USER appuser
 
