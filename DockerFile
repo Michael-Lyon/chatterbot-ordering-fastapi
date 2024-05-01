@@ -20,18 +20,16 @@ RUN adduser --disabled-password --gecos "" myuser
 RUN python -m pip install python-dev-tools
 
 RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
+RUN python -m pip install 'PyYaml==5.1'
 
 # Copy the source code into the container.
 COPY . /app
 ENV NLTK_DATA=/usr/local/nltk_data
 ADD . $NLTK_DATA
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements2.txt,target=requirements2.txt \
-    python -m pip install -r requirements2.txt
+
 
 
 
