@@ -30,11 +30,10 @@ RUN --mount=type=cache,id=s/a797b9c9-3408-455d-9d7a-be009ce9aa1a-/root/cache/pip
 python -m pip install -r requirements.txt
 
 
-RUN python -m pip install git+git://github.com/gunthercox/chatterbot-corpus@master#egg=chatterbot_corpus
 
-RUN python -m pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.1.0/en_core_web_sm-2.1.0.tar.gz#egg=en_core_web_sm
+# RUN python -m pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.1.0/en_core_web_sm-2.1.0.tar.gz#egg=en_core_web_sm
 
-RUN python -m pip install https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-2.1.0/de_core_news_sm-2.1.0.tar.gz#egg=de_core_news_sm
+# RUN python -m pip install https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-2.1.0/de_core_news_sm-2.1.0.tar.gz#egg=de_core_news_sm
 
 # Copy the source code into the container.
 COPY . /app
