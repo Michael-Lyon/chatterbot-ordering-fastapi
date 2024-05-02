@@ -40,6 +40,8 @@ RUN python -m pip install 'PyYAML==5.1'
 #     python -m pip install -r requirements.txt
 
 
+# Switch to the privileged user.
+USER myuser
 
 # Copy the source code into the container.
 COPY . /app
@@ -52,8 +54,7 @@ RUN [ "python", "-c", "import nltk; nltk.download('all', download_dir='$NLTK_DAT
 
 RUN python -m pip install git+git://github.com/gunthercox/chatterbot-corpus@master#egg=chatterbot_corpus
 
-# Switch to the privileged user.
-USER myuser
+
 
 # Expose the port that the application listens on.
 EXPOSE 8000
