@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 # install system dependencies
 RUN apt-get update \
     && apt-get -y install gcc make \
-    && apt-get install build-essential python-dev \
+    && apt-get install build-essential python-dev git \
     && rm -rf /var/lib/apt/lists/*s
 
 WORKDIR /app
