@@ -50,7 +50,7 @@ RUN [ "python", "-c", "import nltk; nltk.download('all', download_dir='$NLTK_DAT
 USER myuser
 
 # Expose the port that the application listens on.
-# EXPOSE 80
+EXPOSE 80
 
 # Run the application.
-CMD uvicorn main:app
+CMD uvicorn main:app --host 0.0.0.0 --port 80
