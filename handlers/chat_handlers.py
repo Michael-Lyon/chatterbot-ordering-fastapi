@@ -26,13 +26,6 @@ trainer = ChatterBotCorpusTrainer(chatbot)
 trainer.train("chatterbot.corpus.english")
 
 
-
-# to get menu
-async def get_menu():
-    populate_menu()
-    menu = list(menu_collection.find({}, {'_id': False}))  # Exclude '_id' from the result
-    return {"menu": menu}
-
 # Function to populate the menu collection with initial data
 def populate_menu():
     # List of menu items to add
@@ -56,6 +49,15 @@ def populate_menu():
         # Check if the item already exists in the collection
         if not menu_collection.find_one({"name": item.name}):
             menu_collection.insert_one(item.model_dump())
+
+
+
+# to get menu
+async def get_menu():
+    populate_menu()
+    menu = list(menu_collection.find({}, {'_id': False}))  # Exclude '_id' from the result
+    return {"menu": menu}
+
 
 
 
