@@ -1,1 +1,1 @@
-web: uvicorn main:app
+web: uvicorn main:app --bind \"[::]:$PORT\"
