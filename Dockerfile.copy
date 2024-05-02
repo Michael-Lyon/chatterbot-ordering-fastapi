@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 # install system dependencies
 RUN apt-get update \
     && apt-get -y install gcc make \
-    && apt-get install python-yaml \
+    && apt-get -y install python-yaml \
     && rm -rf /var/lib/apt/lists/*s
 
 WORKDIR /app
@@ -26,6 +26,8 @@ RUN adduser --disabled-password --gecos "" myuser
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
 RUN python -m pip install python-dev-tools
+
+RUN python -m pip install 'PyYAML==5.1'
 
 
 RUN --mount=type=cache,id=s/a797b9c9-3408-455d-9d7a-be009ce9aa1a-/root/cache/pip,target=/root/.cache/pip \
