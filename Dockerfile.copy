@@ -27,11 +27,12 @@ RUN adduser --disabled-password --gecos "" myuser
 RUN python -m pip install python-dev-tools
 
 
-RUN --mount=type=cache,id=s/a797b9c9-3408-455d-9d7a-be009ce9aa1a-/root/cache/pip,target=/root/.cache/pip
+RUN --mount=type=cache,id=s/a797b9c9-3408-455d-9d7a-be009ce9aa1a-/root/cache/pip,target=/root/.cache/pip \
+    python -m pip install -r requirements.txt
 
 # RUN  --mount=type=bind,source=requirements.txt,target=requirements.txt
 
-RUN   python -m pip install -r requirements.txt
+# RUN   python -m pip install -r requirements.txt
 
 # RUN --mount=type=cache,id=s/a797b9c9-3408-455d-9d7a-be009ce9aa1a-/root/cache/pip,target=/root/.cache/pip \
 #     --mount=type=bind,source=requirements.txt,target=requirements.txt \
