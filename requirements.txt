@@ -44,7 +44,7 @@ python-dateutil==2.7.5
 python-dotenv==1.0.1
 python-multipart==0.0.9
 pytz==2022.2.1
-PyYAML==3.13
+PyYAML==5.4.1-cp37-cp37m-manylinux1_x86_64.whl
 regex==2022.9.11
 requests==2.31.0
 six==1.16.0
