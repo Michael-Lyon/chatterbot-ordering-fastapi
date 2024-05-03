@@ -1,23 +1,67 @@
-ARG PYTHON_VERSION=3.11.9
-FROM python:${PYTHON_VERSION} as base
+# ---- OpenJDK image
+FROM openjdk:8-jdk-alpine AS base
 
-# Prevents Python from writing pyc files.
-ENV PYTHONDONTWRITEBYTECODE=1
+# ---- Inputs
+ARG PYTHON_VERSION='3.11.9'
 
-# Keeps Python from buffering stdout and stderr to avoid situations where
-# the application crashes without emitting any logs due to buffering.
-ENV PYTHONUNBUFFERED=1
-
-# install system dependencies
-# RUN apt-get update \
-#     && apt-get -y install gcc make \
-#     && apt-get install python-yaml \
-#     && rm -rf /var/lib/apt/lists/*s
-
+# ---- Create app directory
 WORKDIR /app
 
-# Create a privileged user.
-RUN adduser --disabled-password --gecos "" myuser
+# ---- Upload the current directory and descendants to WORKDIR
+# ---- Ignores files per .dockerignore
+COPY . /app
+
+# ---- Update OS
+RUN apk --update upgrade
+
+# ---- Install Alpine packages
+RUN apk add --no-cache \
+    build-base \
+    bzip2-dev \
+    ca-certificates \
+    curl \
+    git \
+    libffi-dev \
+    libxslt-dev \
+    linux-headers \
+    ncurses-dev \
+    openssl-dev \
+    readline-dev \
+    sqlite-dev
+
+# ---- Change user to appuser
+RUN addgroup -g 1001 -S appuser && adduser -u 1001 -S appuser -G appuser
+RUN chown -R appuser:appuser .
+USER appuser
+
+# --- Set environment variables
+ENV HOME /app
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PYTHON_VERSION $PYTHON_VERSION
+ENV PATH $PYENV_ROOT/shims:$PATH:$PYENV_ROOT/bin
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST 1
+
+# ---- Install pyenv
+RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer \
+    -o pyenv-installer && \
+    /bin/bash pyenv-installer && \
+    rm pyenv-installer
+
+# ---- Install Python
+RUN pyenv install $PYTHON_VERSION
+RUN pyenv global $PYTHON_VERSION
+RUN pyenv rehash
+
+# ---- Install the application
+RUN make install
+
+# ---- Remove Alpine packages not needed at runtime
+USER root
+RUN apk del \
+    build-base \
+    git \
+    linux-headers
+USER appuser
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
@@ -47,21 +91,6 @@ USER myuser
 # Expose the port that the application listens on.
 EXPOSE 10000
 
-# Install OpenJDK-8
-RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk && \
-    apt-get install -y ant && \
-    apt-get clean;
-
-# Fix certificate issues
-RUN apt-get update && \
-    apt-get install ca-certificates-java && \
-    apt-get clean && \
-    update-ca-certificates -f;
-
-# Setup JAVA_HOME -- useful for docker commandline
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-RUN export JAVA_HOME
 
 
 # Run the application.
