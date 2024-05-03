@@ -1,6 +1,14 @@
 ARG PYTHON_VERSION=3.11.9
 FROM python:${PYTHON_VERSION} as base
 
+# Install Java 8
+RUN apt-get update && \
+    apt-get install -y openjdk-8-jdk && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set environment variables for Java
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+ENV PATH=$PATH:$JAVA_HOME/bin
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -48,8 +56,6 @@ USER myuser
 
 # Expose the port that the application listens on.
 EXPOSE 10000
-
-
 
 # Run the application.
 CMD uvicorn main:app --host=0.0.0.0 --port=10000
