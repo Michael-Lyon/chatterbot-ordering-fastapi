@@ -1,0 +1,57 @@
+Hello?
+Hi, how can i be of assistance.
+Hi?
+Welcome, what would you like to eat.
+I want to order some food?
+Sure, I can help you with that! What would you like to order today.
+I'd like to place an order?
+Sure, Here are some popular items on our menu: [List of popular items, e.g.,fried chicken burger, Chick'N Crisp Croissan' w/Egg, healthy soya nugget snacks,cheesy fries]. Would you like more details on any specific item?
+How can I order from Cheesybites?
+You can place your order right here by typing your choice and specify the quantity. You can also call us on 01332453489 to place your order. How would you like to proceed.
+I'm hungry. What can I get from Cheesybites?
+Sure, Here are some popular items on our menu: [List of popular items, e.g.,fried chicken burger, Chick'N Crisp Croissan' w/Egg, healthy soya nugget snacks,cheesy fries]. Would you like more details on any specific item?
+Can you help me with ordering food?
+Yes, you can place your order right here by typing your choice and specify the quantity. You can also call us on 01332453489 to place your order. How would you like to proceed.
+What's on the menu?
+Here are some popular items on our menu: [List of popular items, e.g.,fried chicken burger, Chick'N Crisp Croissan' w/Egg, healthy soya nugget snacks,cheesy fries]. Would you like more details on any specific item?
+Can you show me the menu?
+Sure, here are some popular items on our menu: [List of popular items, e.g.,fried chicken burger, Chick'N Crisp Croissan' w/Egg, healthy soya nugget snacks,cheesy fries]. Would you like more details on any specific item?
+What options do you have?
+Here are some popular items on our menu: [List of popular items, e.g.,fried chicken burger, Chick'N Crisp Croissan' w/Egg, healthy soya nugget snacks,cheesy fries]. Would you like more details on any specific item?
+Tell me about your menu?
+Here are some popular items on our menu: [List of popular items, e.g.,fried chicken burger, Chick'N Crisp Croissan' w/Egg, healthy soya nugget snacks,cheesy fries]. Would you like more details on any specific item?
+Do you have any special offers?
+Yes, we have some exciting special offers available right now! You can get ["Buy One double size burger, Get One Free Dipping"]. Would you like to take advantage of any of these offers?
+Are there any discounts available?
+Yes, we have some exciting special offers available right now! You can get ["Buy One double size burger, Get One Free Dipping"]. Would you like to take advantage of any of these offers?
+Can I get a deal on my order?
+Yes, we have some exciting special offers available right now! You can get ["Buy One double size burger, Get One Free Dipping"]. Would you like to take advantage of any of these offers?
+Can I customize my order?
+Absolutely! We offer various customization options for our menu items. What specific changes would you like to make to your order?
+I want to make some changes to my meal?
+What specific changes would you like to make to your order.
+Is it possible to add extra cheese to my burger?
+Absolutely! We offer various customization options for our menu items. What specific changes would you like to make to your order?
+I'd like to place an order for delivery.
+Sure, I can assist you with placing your order. Please provide me with your delivery address and the items you'd like to order.
+Can you take my order now?
+Sure, please provide me with your delivery address and the items you'd like to order.
+How do I proceed with ordering?
+Sure, I can assist you with placing your order. Please provide me with your delivery address and the items you'd like to order.
+My delivery address is [user provides address].
+Can you deliver to [user provides address]?
+Yes we deliver to any address withing east midlands
+Thank you for providing your delivery address. Your order will be delivered to [user-provided address]. Is there anything else I can assist you with?
+No thank you.
+How can I pay for my order?
+You can pay via debit/credit card or cash on delivery
+What payment methods do you accept?
+We accept various payment methods including credit/debit cards, cash on delivery. Which payment method would you prefer?
+Can I pay with a credit card?
+We accept various payment methods including credit/debit cards, cash on delivery. Which payment method would you prefer?
+Can I get a confirmation of my order?
+Your order has been successfully placed! You will receive a confirmation email shortly.
+How do I know if my order was successful?
+You will receive a confirmation email shortly
+Can you confirm my order?
+Your order has been successfully placed! You will receive a confirmation email shortly. If you have any further questions or need assistance, feel free to ask. Thank you for choosing Cheesybites!

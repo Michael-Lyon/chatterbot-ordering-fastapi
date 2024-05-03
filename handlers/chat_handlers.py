@@ -1,4 +1,5 @@
 # handlers/chat_handler.py
+import re
 from typing import List
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
@@ -30,6 +31,10 @@ def train_chatbot():
     if not TRAINED:
         trainer = ChatterBotCorpusTrainer(chatbot)
         trainer.train("chatterbot.corpus.english")
+        with open("some_data.txt", "r") as corpus_file:
+            content = corpus_file.read()
+            my_corpus = content.split("\n")
+            trainer.train(my_corpus)
         TRAINED = True
 
 
