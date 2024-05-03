@@ -1,0 +1,97 @@
+# ---- OpenJDK image
+FROM openjdk:8-jdk-alpine AS base
+
+# ---- Inputs
+ARG PYTHON_VERSION='3.11.9'
+
+# ---- Create app directory
+WORKDIR /app
+
+# ---- Upload the current directory and descendants to WORKDIR
+# ---- Ignores files per .dockerignore
+COPY . /app
+
+# ---- Update OS
+RUN apk --update upgrade
+
+# ---- Install Alpine packages
+RUN apk add --no-cache \
+    build-base \
+    bzip2-dev \
+    ca-certificates \
+    curl \
+    git \
+    libffi-dev \
+    libxslt-dev \
+    linux-headers \
+    ncurses-dev \
+    openssl-dev \
+    readline-dev \
+    sqlite-dev
+
+# ---- Change user to appuser
+RUN addgroup -g 1001 -S appuser && adduser -u 1001 -S appuser -G appuser
+RUN chown -R appuser:appuser .
+USER appuser
+
+# --- Set environment variables
+ENV HOME /app
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PYTHON_VERSION $PYTHON_VERSION
+ENV PATH $PYENV_ROOT/shims:$PATH:$PYENV_ROOT/bin
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST 1
+
+# ---- Install pyenv
+RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer \
+    -o pyenv-installer && \
+    /bin/bash pyenv-installer && \
+    rm pyenv-installer
+
+# ---- Install Python
+RUN pyenv install $PYTHON_VERSION
+RUN pyenv global $PYTHON_VERSION
+RUN pyenv rehash
+
+# ---- Install the application
+RUN make install
+
+# ---- Remove Alpine packages not needed at runtime
+USER root
+RUN apk del \
+    build-base \
+    git \
+    linux-headers
+USER appuser
+
+# Download dependencies as a separate step to take advantage of Docker's caching.
+# Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
+# Leverage a bind mount to requirements.txt to avoid having to copy them into
+# into this layer.
+RUN python -m pip install python-dev-tools
+
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=bind,source=requirements.txt,target=requirements.txt \
+    python -m pip install -r requirements.txt
+
+RUN python -m pip install 'PyYAML==5.1'
+
+# Copy the source code into the container.
+COPY . /app
+ENV NLTK_DATA=/home/appuser/nltk_data
+ADD . $NLTK_DATA
+
+
+RUN [ "python", "-c", "import nltk; nltk.download('all')" ]
+RUN [ "python", "-c", "import nltk; nltk.download('averaged_perceptron_tagger')" ]
+
+# Switch to the privileged user.
+USER appuser
+
+# Expose the port that the application listens on.
+EXPOSE 10000
+
+
+
+# Run the application.
+CMD uvicorn main:app --host=0.0.0.0 --port=10000
