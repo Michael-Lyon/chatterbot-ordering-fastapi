@@ -2,7 +2,7 @@
 import re
 from typing import List
 from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.trainers import ChatterBotCorpusTrainer, ListTrainer
 import uuid
 import nltk
 from nltk import Tree
@@ -31,10 +31,10 @@ def train_chatbot():
     if not TRAINED:
         trainer = ChatterBotCorpusTrainer(chatbot)
         trainer.train("chatterbot.corpus.english")
-        with open("some_data.txt", "r") as corpus_file:
-            content = corpus_file.read()
-            my_corpus = content.split("\n")
-            trainer.train(my_corpus)
+        with open("handlers/some_data.txt", "r") as data:
+            trainer2 = ListTrainer(chatbot)
+            content = data.read()
+            trainer2.train(content.split("\n"))
         TRAINED = True
 
 
