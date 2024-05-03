@@ -19,6 +19,11 @@ app.add_middleware(
 # Train the chatbot
 
 
+@app.get("/")
+async def root():
+    chat_handlers.train_chatbot()
+    return {"A simple chat bot"}
+
 @app.post("/chat")
 async def chat_with_bot(chat_input: ChatInput):
     chat_handlers.train_chatbot()

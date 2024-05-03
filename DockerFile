@@ -38,8 +38,8 @@ ENV NLTK_DATA=/home/myuser/nltk_data
 ADD . $NLTK_DATA
 
 
-RUN [ "python", "-c", "import nltk; nltk.download('all', download_dir='$NLTK_DATA')" ]
-RUN [ "python", "-c", "import nltk; nltk.download('averaged_perceptron_tagger', download_dir='$NLTK_DATA')" ]
+RUN [ "python", "-c", "import nltk; nltk.download('all')" ]
+RUN [ "python", "-c", "import nltk; nltk.download('averaged_perceptron_tagger')" ]
 
 # Switch to the privileged user.
 USER myuser
