@@ -15,8 +15,8 @@ from pathlib import Path
 root_dir = Path(__file__).parent  # Go up two levels to reach the root directory
 
 # Construct the path to the file relative to the root directory
-file_path1 = root_dir / "stanford-ner-2014-08-27" / "classifiers" / "english.all.3class.distsim.crf.ser.gz"
-file_path2 = root_dir / "stanford-ner-2014-08-27" / "stanford-ner.jar"
+file_path1 = "stanford-ner-2014-08-27/classifiers/english.all.3class.distsim.crf.ser.gz"
+file_path2 = "stanford-ner-2014-08-27/stanford-ner.jar"
 
 
 
