@@ -34,12 +34,12 @@ RUN python -m pip install 'PyYAML==5.1'
 
 # Copy the source code into the container.
 COPY . /app
-ENV NLTK_DATA=/usr/local/nltk_data
+ENV NLTK_DATA=/home/myuser/nltk_data
 ADD . $NLTK_DATA
 
 
-RUN [ "python", "-c", "import nltk; nltk.download('all', download_dir='$NLTK_DATA')" ]
-RUN [ "python", "-c", "import nltk; nltk.download('averaged_perceptron_tagger', download_dir='$NLTK_DATA')" ]
+RUN [ "python", "-c", "import nltk; nltk.download('all', download_dir=$NLTK_DATA)" ]
+RUN [ "python", "-c", "import nltk; nltk.download('averaged_perceptron_tagger', download_dir=$NLTK_DATA)" ]
 
 # Switch to the privileged user.
 USER myuser
