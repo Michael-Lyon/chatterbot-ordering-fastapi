@@ -1,14 +1,23 @@
+# Use multi-stage builds
+# Stage 1: Python
 ARG PYTHON_VERSION=3.11.9
-FROM python:${PYTHON_VERSION} as base
+FROM python:${PYTHON_VERSION} as python_base
 
-# Install Java 8
-RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk && \
-    rm -rf /var/lib/apt/lists/*
+# Your existing Python setup here...
+
+# Stage 2: Java
+FROM openjdk:8-jdk as java_base
+
+# Stage 3: Final
+FROM python_base
+
+# Copy Java from java_base
+COPY --from=java_base /usr/local/openjdk-8 /usr/local/openjdk-8
 
 # Set environment variables for Java
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-ENV PATH=$PATH:$JAVA_HOME/bin
+ENV JAVA_HOME=/usr/local/openjdk-8
+ENV PATH=$JAVA_HOME/bin:$PATH
+
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
