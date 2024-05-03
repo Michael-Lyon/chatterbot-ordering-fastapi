@@ -32,9 +32,10 @@ def train_chatbot():
         trainer = ChatterBotCorpusTrainer(chatbot)
         trainer.train("chatterbot.corpus.english")
         with open("handlers/some_data.txt", "r") as data:
-            trainer2 = ListTrainer(chatbot)
-            content = data.read()
-            trainer2.train(content.split("\n"))
+            ...
+            # trainer2 = ListTrainer(chatbot)
+            # content = data.read()
+            # trainer2.train(content.split("\n"))
         TRAINED = True
 
 
