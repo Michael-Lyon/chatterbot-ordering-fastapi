@@ -1,6 +1,7 @@
 ARG PYTHON_VERSION=3.11.9
 FROM python:${PYTHON_VERSION} as base
 
+
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
 
@@ -31,6 +32,33 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install -r requirements.txt
 
 RUN python -m pip install 'PyYAML==5.1'
+
+# JDK-11 is a package that is easy to install for the current image.
+RUN apt-get update && \
+    apt-get install -y openjdk-8-jdk && \
+    apt-get install -y ant && \
+    apt-get clean;
+
+# If you try JDK-7, the following is a candidate but it didn't work.
+# RUN apt-get update && \
+#     apt-get install -y fonts-dejavu-extra && \
+#     apt-get install -y --allow-downgrades tzdata=2019c-0+deb8u1 && \
+#     apt-get install -y tzdata-java && \
+#     apt-get install -y openjdk-7-jre-headless && \
+#     apt-get install -y openjdk-7-jre && \
+#     apt-get install -y openjdk-7-jdk && \
+#     apt-get install -y ant && \
+#     apt-get clean;
+
+RUN apt-get update && \
+    apt-get install ca-certificates-java && \
+    apt-get clean && \
+    update-ca-certificates -f;
+
+# Setup JAVA_HOME -- useful for docker commandline
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+RUN export JAVA_HOME
+RUN java -version
 
 # Copy the source code into the container.
 COPY . /app
