@@ -16,9 +16,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Train the chatbot
+
 
 @app.post("/chat")
 async def chat_with_bot(chat_input: ChatInput):
+    chat_handlers.train_chatbot()
     print(chat_input)
     return await chat_handlers.process_request(chat_input.user_input)
 

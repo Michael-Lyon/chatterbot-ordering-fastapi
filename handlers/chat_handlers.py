@@ -5,7 +5,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 import uuid
 import nltk
 from nltk import Tree
-
+TRAINED = False
 
 
 from helpers import add_to_order, extract_name_address, extract_order_id, get_order, remove_order
@@ -21,9 +21,17 @@ chatbot = ChatBot('CustomerServiceBot',
                 database_uri="mongodb://pygod:pygod1234@monorail.proxy.rlwy.net:16429/chatbot_database",
                 )
 
-# Train the chatbot
-trainer = ChatterBotCorpusTrainer(chatbot)
-trainer.train("chatterbot.corpus.english")
+
+# Global flag
+TRAINED = False
+
+def train_chatbot():
+    global TRAINED
+    if not TRAINED:
+        trainer = ChatterBotCorpusTrainer(chatbot)
+        trainer.train("chatterbot.corpus.english")
+        TRAINED = True
+
 
 
 # Function to populate the menu collection with initial data
